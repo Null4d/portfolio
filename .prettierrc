@@ -1,7 +1,6 @@
 {
- "semi": true,
- "singleQuote": false,
- "tabWidth": 2,
- "insertFinalNewline": true
- "bracketSpacing": true,
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "bracketSpacing": true
 }
