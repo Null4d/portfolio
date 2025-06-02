@@ -1,50 +1,79 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { headerData } from "../data/index";
 
 const Header = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const { logo, navigation } = headerData;
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible((prev) => !prev);
+  };
+
+  const handleNavClick = () => {
+    setIsSidebarVisible(false);
+  };
+
   return (
-    <header className="relative bg-primary-1">
-      <div className="flex items-center h-16 border border-primary-3">
-        <div className="h-full border-r border-primary-3">
-          <Link
-            to="/"
-            className="flex items-center w-full h-full pl-5 text-base duration-300 mr-28 text-primary-2 hover:text-primary-7"
-          >
-            q1sh0x
-          </Link>
+    <>
+      <section className="relative bg-primary-1">
+        <div className="flex items-center h-16 border border-primary-3">
+          <div className="h-full lg:border-r border-primary-3">
+            <Link
+              to={logo.href}
+              className="flex items-center w-full h-full pl-5 text-base lg:mr-28 text-primary-2 duration-300 hover:text-primary-7"
+              onClick={handleNavClick}
+            >
+              {logo.text}
+            </Link>
+          </div>
+
+          <div className="flex items-center h-full w-full lg:w-auto lg:flex-1">
+            <ul
+              className={`fixed lg:static top-16 lg:top-0 right-0 lg:right-none h-[calc(100vh-64px)] lg:h-full lg:w-full md:w-96 w-full border-x lg:border-none border-primary-3 bg-primary-1 lg:bg-transparent duration-500 transition-transform lg:transform-none z-40 flex flex-col lg:flex-row text-base lg:flex text-primary-2 ${isSidebarVisible ? "translate-x-0" : "translate-x-full"}`}
+            >
+              {navigation.map((item) => (
+                <li
+                  key={item.id}
+                  className="relative flex h-auto lg:h-full group/nav"
+                >
+                  <Link
+                    to={item.href}
+                    className="flex items-center w-full h-full p-3 duration-200 border-b border-r lg:border-b-0 text-nowrap lg:px-7 lg:py-0 text-primary-2 border-primary-3 lg:w-auto hover:bg-primary-3 lg:hover:bg-transparent"
+                    onClick={handleNavClick}
+                  >
+                    {item.name}
+                  </Link>
+                  <span className="absolute bottom-0 left-0 hidden w-0 h-1 transition-all duration-300 lg:flex bg-primary-4 group-hover/nav:w-full"></span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="lg:hidden w-full flex">
+              <div
+                onClick={toggleSidebar}
+                className="group/burger relative ml-auto mr-4 flex lg:hidden flex-col min-w-11 gap-2.5 cursor-pointer"
+              >
+                <span
+                  className={`block h-0.5 transition-all duration-300 bg-primary-7 ${isSidebarVisible ? "-rotate-45 translate-y-3 w-11" : "w-7 group-hover/burger:w-11"}`}
+                ></span>
+                <span
+                  className={`block h-0.5 transition-all duration-300 bg-primary-7 ${isSidebarVisible ? "opacity-0" : "w-11"}`}
+                ></span>
+                <span
+                  className={`self-end block h-0.5 transition-all duration-300 bg-primary-7 ${isSidebarVisible ? "rotate-45 -translate-y-3 w-11" : "w-7 group-hover/burger:w-11"}`}
+                ></span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center h-full flex-1">
-          <ul className="flex flex-row text-base text-primary-2 h-full w-auto">
-            <li className="relative flex h-full group/nav">
-              <Link
-                to="/"
-                className="flex items-center h-full px-7 py-0 duration-200 border-r text-nowrap text-primary-2 border-primary-3 hover:bg-transparent"
-              >
-                _hello
-              </Link>
-              <span className="absolute bottom-0 left-0 w-0 h-1 transition-all duration-300 bg-primary-4 group-hover/nav:w-full"></span>
-            </li>
-            <li className="relative flex h-full group/nav">
-              <Link
-                to="/about"
-                className="flex items-center h-full px-7 py-0 duration-200 border-r text-nowrap text-primary-2 border-primary-3 hover:bg-transparent"
-              >
-                _about-me
-              </Link>
-              <span className="absolute bottom-0 left-0 w-0 h-1 transition-all duration-300 bg-primary-4 group-hover/nav:w-full"></span>
-            </li>
-            <li className="relative flex h-full group/nav">
-              <Link
-                to="/projects"
-                className="flex items-center h-full px-7 py-0 duration-200 border-r text-nowrap text-primary-2 border-primary-3 hover:bg-transparent"
-              >
-                _projects
-              </Link>
-              <span className="absolute bottom-0 left-0 w-0 h-1 transition-all duration-300 bg-primary-4 group-hover/nav:w-full"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
+      </section>
+
+      <div
+        className={`fixed top-16 left-0 w-full h-[calc(100vh-64px)] bg-black bg-opacity-50 z-30 transition-opacity duration-500 lg:hidden ${isSidebarVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        onClick={toggleSidebar}
+      />
+    </>
   );
 };
 
