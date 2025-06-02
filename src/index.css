@@ -11,3 +11,13 @@
   --primary-6: #fb7185;
   --primary-7: #f8fafc;
 }
+
+@font-face {
+  font-family: "Kode Mono";
+  src:
+    url("./fonts/KodeMono-Regular.woff2") format("woff2"),
+    url("./fonts/KodeMono-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

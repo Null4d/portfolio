@@ -13,6 +13,9 @@ module.exports = {
         "primary-6": "var(--primary-6)",
         "primary-7": "var(--primary-7)",
       },
+      fontFamily: {
+        kode: ["Kode Mono", "monospace"],
+      },
     },
   },
   plugins: [],
