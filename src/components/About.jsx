@@ -33,8 +33,8 @@ const About = () => {
           </h4>
         </div>
         <ul>
-          {certificates.map((certificate, index) => (
-            <li key={index}>
+          {certificates.map((certificate) => (
+            <li key={certificate.id || certificate.name}>
               <button
                 onClick={() => handleCertificateClick(certificate.url)}
                 className="flex items-center py-2 pl-4 text-primary-2 hover:bg-primary-3 hover:text-primary-7 duration-200 cursor-pointer w-full text-left"
@@ -60,14 +60,17 @@ const About = () => {
             <br />
             About Me
             <br />
-            {personalInfo.description.split("\n\n").map((paragraph, index) => (
-              <React.Fragment key={index}>
-                {paragraph}
-                {index < personalInfo.description.split("\n\n").length - 1 && (
-                  <br />
-                )}
-              </React.Fragment>
-            ))}
+            {personalInfo.description
+              .split("\n\n")
+              .map((paragraph, paragraphIndex) => (
+                <React.Fragment
+                  key={`about-paragraph-${paragraph.slice(0, 20)}-${paragraphIndex}`}
+                >
+                  {paragraph}
+                  {paragraphIndex <
+                    personalInfo.description.split("\n\n").length - 1 && <br />}
+                </React.Fragment>
+              ))}
             <br />
             */
           </p>
@@ -81,9 +84,12 @@ const About = () => {
         <div className="flex flex-col w-full px-4 py-4 border-t border-primary-3">
           <p className="text-lg text-primary-2">/ / {sections.codeShowcase}</p>
           <div className="flex flex-col">
-            {codeSnippets.map((snippet, index) => (
+            {codeSnippets.map((snippet) => (
               <CodeSnippet
-                key={index}
+                key={
+                  snippet.id ||
+                  `snippet-${snippet.username}-${snippet.createdTime}-${snippet.code.slice(0, 10)}`
+                }
                 username={snippet.username}
                 createdTime={snippet.createdTime}
                 stars={snippet.stars}

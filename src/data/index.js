@@ -1,3 +1,7 @@
+import Helendo from "../images/project/HelendoProject.png";
+import OldPortfolio from "../images/project/ProjectOldPortfolio.png";
+import Playx from "../images/project/ProjectPlayx.png";
+
 export const heroData = {
   greeting: "Hi all. I am",
   name: "Q1sh0x",
@@ -88,3 +92,34 @@ My goal is to become a highly skilled Frontend developer, contribute to innovati
     codeShowcase: "Code snippet showcase:",
   },
 };
+
+export const projects = [
+  {
+    id: 1,
+    title: "Playx",
+    tech: ["HTML", "CSS", "Tailwind", "JavaScript", "React"],
+    image: Playx,
+    url: "https://null4d.github.io/Playx.io/",
+  },
+  {
+    id: 2,
+    title: "Helendo",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: Helendo,
+    url: "https://null4d.github.io/helendo.io/",
+  },
+  {
+    id: 3,
+    title: "Old Portfolio",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: OldPortfolio,
+    url: "https://null4d.github.io/CreatorPortfolio/",
+  },
+];
+
+export const techFilterOptions = [
+  { name: "React", className: "icon-reactjs text-2xl" },
+  { name: "HTML & CSS", className: "icon-html5 text-2xl" },
+  { name: "Tailwind", className: "icon-tailwindcss text-2xl" },
+  { name: "JavaScript", className: "icon-javascript text-2xl" },
+];

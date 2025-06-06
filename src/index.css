@@ -48,6 +48,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-instagram:before {
+  content: "\e922";
+}
+
 .icon-close:before {
   content: "\e916";
 }
@@ -68,10 +72,118 @@
   content: "\e91e";
 }
 
+.icon-star:before {
+  content: "\e91f";
+}
+
+.icon-message:before {
+  content: "\e920";
+}
+
 .icon-folder:before {
   content: "\e921";
 }
 
 .icon-external-link:before {
   content: "\e91b";
+}
+
+.icon-bash-shell:before {
+  content: "\e913";
+}
+
+.icon-typescript:before {
+  content: "\e91a";
+}
+
+.icon-vim:before {
+  content: "\e919";
+}
+
+.icon-node:before {
+  content: "\e918";
+}
+
+.icon-sound-on:before {
+  content: "\e914";
+}
+
+.icon-sound-off:before {
+  content: "\e915";
+}
+
+.icon-mail-full:before {
+  content: "\e910";
+}
+
+.icon-mail:before {
+  content: "\e911";
+}
+
+.icon-discord:before {
+  content: "\e912";
+}
+
+.icon-finger:before {
+  content: "\e90f";
+}
+
+.icon-figma:before {
+  content: "\e901";
+}
+
+.icon-css3:before {
+  content: "\e906";
+}
+
+.icon-html5:before {
+  content: "\e907";
+}
+
+.icon-git:before {
+  content: "\e905";
+}
+
+.icon-agile:before {
+  content: "\e908";
+}
+
+.icon-code:before {
+  content: "\e909";
+}
+
+.icon-javascript:before {
+  content: "\e90a";
+}
+
+.icon-reactjs:before {
+  content: "\e90b";
+}
+
+.icon-scrum:before {
+  content: "\e90c";
+}
+
+.icon-scss:before {
+  content: "\e90d";
+}
+
+.icon-tailwindcss:before {
+  content: "\e90e";
+}
+
+.icon-linkedin:before {
+  content: "\e900";
+}
+
+.icon-upwork:before {
+  content: "\e902";
+}
+
+.icon-github:before {
+  content: "\e903";
+}
+
+.icon-twitter:before {
+  content: "\e904";
 }
