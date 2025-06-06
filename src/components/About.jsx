@@ -19,9 +19,11 @@ const About = () => {
           </h4>
         </div>
         <ul>
-          <li className="flex items-center py-4 pl-4 duration-200 cursor-pointer select-none text-primary-2 xl:py-2 hover:bg-primary-3 hover:text-primary-7">
-            <i className="flex items-center justify-center mr-2 text-md text-primary-2 icon-folder" />
-            bio
+          <li>
+            <button className="flex items-center py-4 pl-4 duration-200 cursor-pointer select-none text-primary-2 xl:py-2 hover:bg-primary-3 hover:text-primary-7 w-full text-left">
+              <i className="flex items-center justify-center mr-2 text-md text-primary-2 icon-folder" />
+              <span>bio</span>
+            </button>
           </li>
         </ul>
         <div className="flex items-center border-y border-primary-3">
@@ -32,13 +34,16 @@ const About = () => {
         </div>
         <ul>
           {certificates.map((certificate, index) => (
-            <li
-              key={index}
-              onClick={() => handleCertificateClick(certificate.url)}
-              className="flex items-center py-2 pl-4 text-primary-2 hover:bg-primary-3 hover:text-primary-7 duration-200 cursor-pointer"
-            >
-              <i className={`${certificate.iconClass} mr-2 text-primary-2`} />
-              {certificate.name}
+            <li key={index}>
+              <button
+                onClick={() => handleCertificateClick(certificate.url)}
+                className="flex items-center py-2 pl-4 text-primary-2 hover:bg-primary-3 hover:text-primary-7 duration-200 cursor-pointer w-full text-left"
+                type="button"
+                aria-label={`Open certificate: ${certificate.name}`}
+              >
+                <i className={`${certificate.iconClass} mr-2 text-primary-2`} />
+                {certificate.name}
+              </button>
             </li>
           ))}
         </ul>

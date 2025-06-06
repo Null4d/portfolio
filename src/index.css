@@ -37,7 +37,7 @@
 
 [class^="icon-"],
 [class*=" icon-"] {
-  font-family: "icomoon" !important;
+  font-family: "icomoon", monospace, sans-serif !important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

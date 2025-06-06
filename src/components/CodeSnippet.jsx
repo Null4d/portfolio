@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-typescript.min.js";
@@ -50,6 +51,12 @@ const CodeSnippet = ({
       </div>
     </div>
   );
+};
+
+CodeSnippet.propTypes = {
+  code: PropTypes.string.isRequired,
+  language: PropTypes.string,
+  username: PropTypes.string,
 };
 
 export default CodeSnippet;
