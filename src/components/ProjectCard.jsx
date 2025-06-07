@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { SoundWrapper } from "../audio/AudioEngine";
 
 const ProjectCard = ({
   title,
@@ -47,16 +48,18 @@ const ProjectCard = ({
               {longDescription}
             </p>
           )}
-          <button
-            type="button"
-            className="px-3 py-2 text-sm rounded-lg text-primary-7 bg-[#1C2B3A] inline-block hover:bg-[#263b52] transition-colors"
-            onClick={handleLinkClick}
-            onKeyDown={handleKeyDown}
-            disabled={!url}
-            aria-label={`View ${title} project`}
-          >
-            view-project
-          </button>
+          <SoundWrapper>
+            <button
+              type="button"
+              className="px-3 py-2 text-sm rounded-lg text-primary-7 bg-[#1C2B3A] inline-block hover:bg-[#263b52] transition-colors"
+              onClick={handleLinkClick}
+              onKeyDown={handleKeyDown}
+              disabled={!url}
+              aria-label={`View ${title} project`}
+            >
+              view-project
+            </button>
+          </SoundWrapper>
         </div>
       </div>
     </div>

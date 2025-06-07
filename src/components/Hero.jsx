@@ -1,5 +1,6 @@
 import React from "react";
 import { heroData } from "../data/index";
+import { SoundWrapper } from "../audio/AudioEngine";
 
 const Hero = () => {
   const { greeting, name, title, comments, codeSnippet } = heroData;
@@ -17,27 +18,32 @@ const Hero = () => {
             <h1 className="w-full pb-1 text-5xl sm:text-6xl text-primary-7">
               {name}
             </h1>
-            <h2 className="w-full pb-20 text-3xl sm:text-4xl text-primary-5">
+            <h2 className="w-full pb-20 text-2xl sm:text-4xl text-primary-5">
               {title}
             </h2>
           </div>
 
           {comments.map((comment, index) => (
-            <p key={index} className="w-full pb-1 text-base text-primary-2">
+            <p
+              key={index}
+              className="w-full pb-1 text-sm sm:text-base text-primary-2"
+            >
               {comment}
             </p>
           ))}
 
-          <div className="w-full pb-1">
+          <div className="w-full flex pb-1">
             <span className="pr-2 text-primary-5">const</span>
             <span className="pr-2 text-primary-2">{codeSnippet.variable}</span>
             <span className="pr-2 text-primary-7">=</span>
-            <span
-              className="pr-2 text-primary-6 cursor-pointer hover:underline hover:text-primary-7 transition-colors"
-              onClick={() => handleLinkClick(codeSnippet.url)}
-            >
-              "{codeSnippet.value}"
-            </span>
+            <SoundWrapper>
+              <span
+                className="pr-2 text-primary-6 cursor-pointer hover:underline hover:text-primary-7 transition-colors"
+                onClick={() => handleLinkClick(codeSnippet.url)}
+              >
+                "{codeSnippet.value}"
+              </span>
+            </SoundWrapper>
           </div>
         </div>
 

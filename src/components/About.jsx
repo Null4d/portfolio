@@ -1,6 +1,7 @@
 import React from "react";
 import CodeSnippet from "./CodeSnippet";
 import { aboutData } from "../data/index";
+import { SoundWrapper } from "../audio/AudioEngine";
 
 const About = () => {
   const { personalInfo, certificates, codeSnippets, sections } = aboutData;
@@ -19,19 +20,23 @@ const About = () => {
           </h4>
         </div>
         <ul>
-          <li>
-            <button className="flex items-center py-4 pl-4 duration-200 cursor-pointer select-none text-primary-2 xl:py-2 hover:bg-primary-3 hover:text-primary-7 w-full text-left">
-              <i className="flex items-center justify-center mr-2 text-md text-primary-2 icon-folder" />
-              <span>bio</span>
-            </button>
-          </li>
+          <SoundWrapper>
+            <li>
+              <button className="flex items-center py-4 pl-4 duration-200 cursor-pointer select-none text-primary-2 xl:py-2 hover:bg-primary-3 hover:text-primary-7 w-full text-left">
+                <i className="flex items-center justify-center mr-2 text-md text-primary-2 icon-folder" />
+                <span>bio</span>
+              </button>
+            </li>
+          </SoundWrapper>
         </ul>
-        <div className="flex items-center border-y border-primary-3">
-          <i className="flex items-center justify-center ml-3 text-sm text-primary-7 icon-arrow-down" />
-          <h4 className="w-full py-2 pl-2 text-primary-7">
-            {sections.certificates}
-          </h4>
-        </div>
+        <SoundWrapper>
+          <div className="flex items-center border-y border-primary-3">
+            <i className="flex items-center justify-center ml-3 text-sm text-primary-7 icon-arrow-down" />
+            <h4 className="w-full py-2 pl-2 text-primary-7">
+              {sections.certificates}
+            </h4>
+          </div>
+        </SoundWrapper>
         <ul>
           {certificates.map((certificate) => (
             <li key={certificate.id || certificate.name}>

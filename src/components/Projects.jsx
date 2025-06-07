@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
 import ProjectCard from "./ProjectCard";
 import { projects, techFilterOptions } from "../data/index";
+import { SoundWrapper } from "../audio/AudioEngine";
 
 const CheckIcon = () => (
   <svg
@@ -40,22 +41,24 @@ const FilterItem = ({ tech, isSelected, onSelect }) => {
 
   return (
     <li className="list-none">
-      <button
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        className={`flex items-center py-2 pl-4 duration-300 cursor-pointer select-none text-primary-2 hover:bg-primary-3 hover:text-primary-7 w-full text-left ${isSelected ? "bg-primary-3" : ""}`}
-        type="button"
-        aria-pressed={isSelected}
-      >
-        <div
-          className={`w-4 h-4 border border-primary-2 rounded-sm flex mr-2 ${isSelected ? "bg-primary-2 border-none" : "bg-transparent"}`}
-          aria-hidden="true"
+      <SoundWrapper>
+        <button
+          onClick={handleClick}
+          onKeyDown={handleKeyDown}
+          className={`flex items-center py-2 pl-4 duration-300 cursor-pointer select-none text-primary-2 hover:bg-primary-3 hover:text-primary-7 w-full text-left ${isSelected ? "bg-primary-3" : ""}`}
+          type="button"
+          aria-pressed={isSelected}
         >
-          {isSelected && <CheckIcon />}
-        </div>
-        <i className={`mr-2 ${tech.className}`} aria-hidden="true" />
-        {tech.name}
-      </button>
+          <div
+            className={`w-4 h-4 border border-primary-2 rounded-sm flex mr-2 ${isSelected ? "bg-primary-2 border-none" : "bg-transparent"}`}
+            aria-hidden="true"
+          >
+            {isSelected && <CheckIcon />}
+          </div>
+          <i className={`mr-2 ${tech.className}`} aria-hidden="true" />
+          {tech.name}
+        </button>
+      </SoundWrapper>
     </li>
   );
 };

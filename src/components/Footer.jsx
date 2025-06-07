@@ -1,5 +1,6 @@
 import React, { memo, useRef, useState, useCallback } from "react";
 import { socialLinksData } from "../data/index";
+import { SoundWrapper } from "../audio/AudioEngine";
 
 const DOCK_CONFIG = {
   RADIUS: 121,
@@ -121,30 +122,32 @@ function Social() {
                   </div>
                 )}
 
-                <a
-                  target="_blank"
-                  className="dockitem relative w-9 h-9 flex items-center justify-center focus:outline-none rounded-lg origin-bottom transition-all duration-300 ease-out will-change-transform"
-                  rel="noreferrer"
-                  href={item.href}
-                  aria-label={`Visit ${item.name}`}
-                  data-item-name={item.name}
-                  style={{
-                    transform: "scale(var(--dock-scale, 1))",
-                    marginInline: "calc(var(--dock-margin, 0px) + 6px)",
-                  }}
-                  onMouseEnter={() => !isMobile && setHoveredItem(item.name)}
-                  onMouseLeave={() => !isMobile && setHoveredItem(null)}
-                >
-                  <div
-                    className={`flex w-full h-full backdrop-blur-[1px] lg:backdrop-blur-none items-center justify-center text-primary-7 border border-primary-3 rounded-lg transition-all duration-300 ease-out ${item.iconClass} ${
-                      hoveredItem === item.name
-                        ? "bg-primary-2 border-primary-2"
-                        : !isMobile
-                          ? "hover:bg-primary-2"
-                          : ""
-                    }`}
-                  />
-                </a>
+                <SoundWrapper>
+                  <a
+                    target="_blank"
+                    className="dockitem relative w-9 h-9 flex items-center justify-center focus:outline-none rounded-lg origin-bottom transition-all duration-300 ease-out will-change-transform"
+                    rel="noreferrer"
+                    href={item.href}
+                    aria-label={`Visit ${item.name}`}
+                    data-item-name={item.name}
+                    style={{
+                      transform: "scale(var(--dock-scale, 1))",
+                      marginInline: "calc(var(--dock-margin, 0px) + 6px)",
+                    }}
+                    onMouseEnter={() => !isMobile && setHoveredItem(item.name)}
+                    onMouseLeave={() => !isMobile && setHoveredItem(null)}
+                  >
+                    <div
+                      className={`flex w-full h-full backdrop-blur-[1px] lg:backdrop-blur-none items-center justify-center text-primary-7 border border-primary-3 rounded-lg transition-all duration-300 ease-out ${item.iconClass} ${
+                        hoveredItem === item.name
+                          ? "bg-primary-2 border-primary-2"
+                          : !isMobile
+                            ? "hover:bg-primary-2"
+                            : ""
+                      }`}
+                    />
+                  </a>
+                </SoundWrapper>
               </div>
             ))}
           </div>
