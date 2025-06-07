@@ -123,3 +123,31 @@ export const techFilterOptions = [
   { name: "Tailwind", className: "icon-tailwindcss text-2xl" },
   { name: "JavaScript", className: "icon-javascript text-2xl" },
 ];
+
+export const socialLinksData = [
+  {
+    name: "Github",
+    href: "https://github.com/Null4d",
+    iconClass: "icon-github",
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/nullffx/",
+    iconClass: "icon-instagram",
+  },
+  {
+    name: "Discord",
+    href: "https://discord.com/users/884110769027952642",
+    iconClass: "icon-discord",
+  },
+  {
+    name: "Twitter",
+    href: "https://x.com/Q1sh0aa",
+    iconClass: "icon-twitter",
+  },
+  {
+    name: "Email",
+    href: "mailto:batuc0d3r@gmail.com",
+    iconClass: "icon-mail",
+  },
+];
