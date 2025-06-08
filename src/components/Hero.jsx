@@ -1,6 +1,7 @@
 import React from "react";
 import { heroData } from "../data/index";
 import { SoundWrapper } from "../audio/AudioEngine";
+import SnakeGame from "./SnakeGame";
 
 const Hero = () => {
   const { greeting, name, title, comments, codeSnippet } = heroData;
@@ -48,9 +49,7 @@ const Hero = () => {
         </div>
 
         <div className="relative items-center justify-center hidden lg:flex xl:pl-14 lg:pl-4">
-          <div className="w-64 h-64 bg-primary-3 rounded-lg flex items-center text-primary-7 justify-center">
-            In progress...
-          </div>
+          <SnakeGame />
         </div>
       </div>
     </section>

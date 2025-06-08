@@ -121,7 +121,6 @@ class AudioEngine {
     }
   }
 
-  // Cleanup method for proper resource management
   destroy() {
     this.cleanupHandlers.forEach((cleanup) => cleanup());
     this.cleanupHandlers = [];
