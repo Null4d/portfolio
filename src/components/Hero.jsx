@@ -6,7 +6,7 @@ import SnakeGame from "./SnakeGame";
 const Hero = () => {
   const { greeting, name, title, comments, codeSnippet } = heroData;
 
-  const handleLinkClick = (url) => {
+  const openLink = (url) => {
     if (url) window.open(url, "_blank", "noopener noreferrer");
   };
 
@@ -24,9 +24,9 @@ const Hero = () => {
             </h2>
           </div>
 
-          {comments.map((comment, index) => (
+          {comments.map((comment) => (
             <p
-              key={index}
+              key={comment}
               className="w-full pb-1 text-sm sm:text-base text-primary-2"
             >
               {comment}
@@ -38,12 +38,18 @@ const Hero = () => {
             <span className="pr-2 text-primary-2">{codeSnippet.variable}</span>
             <span className="pr-2 text-primary-7">=</span>
             <SoundWrapper>
-              <span
+              <button
                 className="pr-2 text-primary-6 cursor-pointer hover:underline hover:text-primary-7 transition-colors"
-                onClick={() => handleLinkClick(codeSnippet.url)}
+                onClick={() => openLink(codeSnippet.url)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openLink(codeSnippet.url);
+                  }
+                }}
               >
                 "{codeSnippet.value}"
-              </span>
+              </button>
             </SoundWrapper>
           </div>
         </div>

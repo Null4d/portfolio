@@ -23,21 +23,9 @@ export const headerData = {
     href: "/",
   },
   navigation: [
-    {
-      id: 1,
-      name: "_hello",
-      href: "/",
-    },
-    {
-      id: 2,
-      name: "_about-me",
-      href: "/about",
-    },
-    {
-      id: 3,
-      name: "_projects",
-      href: "/projects",
-    },
+    { id: 1, name: "_hello", href: "/" },
+    { id: 2, name: "_about-me", href: "/about" },
+    { id: 3, name: "_projects", href: "/projects" },
   ],
 };
 

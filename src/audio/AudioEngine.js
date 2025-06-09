@@ -1,14 +1,13 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
+import PropTypes from "prop-types";
+
+let audioEngineInstance = null;
 
 class AudioEngine {
   constructor() {
-    if (AudioEngine.instance) return AudioEngine.instance;
-
-    this.sounds = { hover: null, click: null, background: null };
-    this.isBackgroundPlaying = false;
+    this.sounds = { hover: null, click: null };
     this.isInitialized = false;
     this.lastHoverTime = 0;
-    this.subscribers = new Set();
     this.cleanupHandlers = [];
 
     this.paths = {
@@ -17,7 +16,13 @@ class AudioEngine {
     };
 
     this.initOnInteraction();
-    AudioEngine.instance = this;
+  }
+
+  static getInstance() {
+    if (!audioEngineInstance) {
+      audioEngineInstance = new AudioEngine();
+    }
+    return audioEngineInstance;
   }
 
   initOnInteraction() {
@@ -44,17 +49,15 @@ class AudioEngine {
       try {
         const audio = new Audio(path);
         audio.preload = "auto";
-        audio.volume =
-          key === "background" ? 0.1 : key === "hover" ? 0.03 : 0.3;
 
-        if (key === "background") {
-          audio.loop = true;
-        }
+        const volumes = { hover: 0.03, click: 0.3 };
+        audio.volume = volumes[key] || 0.3;
 
         const errorHandler = () => {
           this.sounds[key] = null;
           audio.removeEventListener("error", errorHandler);
         };
+
         audio.addEventListener("error", errorHandler);
         this.sounds[key] = audio;
       } catch {
@@ -83,38 +86,6 @@ class AudioEngine {
     this.sounds.click.play().catch(() => {});
   }
 
-  toggleBackground() {
-    if (!this.isInitialized || !this.sounds.background)
-      return this.isBackgroundPlaying;
-
-    const audio = this.sounds.background;
-
-    if (this.isBackgroundPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
-      this.isBackgroundPlaying = false;
-    } else {
-      audio.play().catch(() => {});
-      this.isBackgroundPlaying = true;
-    }
-
-    this.notifySubscribers();
-    return this.isBackgroundPlaying;
-  }
-
-  subscribe(callback) {
-    this.subscribers.add(callback);
-    return () => this.subscribers.delete(callback);
-  }
-
-  notifySubscribers() {
-    this.subscribers.forEach((callback) => callback(this.isBackgroundPlaying));
-  }
-
-  getBackgroundState() {
-    return this.isBackgroundPlaying;
-  }
-
   setVolume(type, volume) {
     if (this.sounds[type]) {
       this.sounds[type].volume = Math.max(0, Math.min(1, volume));
@@ -133,14 +104,13 @@ class AudioEngine {
       }
     });
 
-    this.sounds = { hover: null, click: null, background: null };
-    this.subscribers.clear();
+    this.sounds = { hover: null, click: null };
     this.isInitialized = false;
-    AudioEngine.instance = null;
+    audioEngineInstance = null;
   }
 }
 
-const audioEngine = new AudioEngine();
+const audioEngine = AudioEngine.getInstance();
 
 const SoundWrapper = React.memo(
   ({
@@ -189,6 +159,16 @@ const SoundWrapper = React.memo(
       [disabled, playClick, onClick],
     );
 
+    const getRole = () => {
+      if (role) return role;
+      return onClick ? "button" : undefined;
+    };
+
+    const getTabIndex = () => {
+      if (tabIndex !== undefined) return tabIndex;
+      return onClick && !disabled ? 0 : undefined;
+    };
+
     return (
       <Component
         className={className}
@@ -196,8 +176,8 @@ const SoundWrapper = React.memo(
         onClick={disabled ? undefined : handleClick}
         onTouchStart={disabled ? undefined : handleTouchStart}
         onKeyDown={disabled ? undefined : handleKeyDown}
-        role={role || (onClick ? "button" : undefined)}
-        tabIndex={tabIndex ?? (onClick && !disabled ? 0 : undefined)}
+        role={getRole()}
+        tabIndex={getTabIndex()}
         aria-disabled={disabled || undefined}
         {...props}
       >
@@ -209,22 +189,18 @@ const SoundWrapper = React.memo(
 
 SoundWrapper.displayName = "SoundWrapper";
 
-const useBackgroundMusic = () => {
-  const [isPlaying, setIsPlaying] = useState(() =>
-    audioEngine.getBackgroundState(),
-  );
-
-  useEffect(() => {
-    const unsubscribe = audioEngine.subscribe(setIsPlaying);
-    return unsubscribe;
-  }, []);
-
-  const toggle = useCallback(() => {
-    return audioEngine.toggleBackground();
-  }, []);
-
-  return { isPlaying, toggle };
+SoundWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
+  playHover: PropTypes.bool,
+  playClick: PropTypes.bool,
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  as: PropTypes.elementType,
+  role: PropTypes.string,
+  tabIndex: PropTypes.number,
 };
 
-export { AudioEngine, SoundWrapper, useBackgroundMusic };
+export { AudioEngine, SoundWrapper };
 export default audioEngine;

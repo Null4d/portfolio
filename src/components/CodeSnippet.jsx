@@ -30,9 +30,9 @@ const CodeSnippet = ({
         <div className="flex flex-col justify-between w-full sm:flex-row">
           <div className="flex items-center pb-3 sm:pb-0">
             <img
-              className="w-12 h-12 rounded-[50%]"
+              className="w-12 h-12 rounded-full"
               src={defaultAvatar}
-              alt="avatar"
+              alt="User avatar"
               onError={(e) => (e.target.src = defaultAvatar)}
             />
             <div className="pl-2">

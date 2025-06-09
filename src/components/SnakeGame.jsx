@@ -242,7 +242,7 @@ const SnakeGame = () => {
     };
 
     animateDeath();
-  }, [draw, resetGame]);
+  }, [draw, resetGame, getRandomFloat, getRandomInt]);
 
   const handleFoodCollection = useCallback(() => {
     headSizeRef.current = CELL_SIZE / 2;
@@ -389,8 +389,8 @@ const SnakeGame = () => {
     draw();
   }, [resetGame, draw]);
 
-  const getFoodScale = useCallback((index) => {
-    const timestamp = collectedFoodTimestamps.current[index];
+  const getFoodScale = useCallback((foodIndex) => {
+    const timestamp = collectedFoodTimestamps.current[foodIndex];
     if (!timestamp) return 1;
     const timeSince = Date.now() - timestamp;
     return timeSince > 500
@@ -478,7 +478,7 @@ const SnakeGame = () => {
                   </span>
                 </div>
                 <p className="text-sm text-gray-300 mb-4">
-                  Congratulations! You've mastered the snake!
+                  Congratulations! You have mastered the snake!
                 </p>
                 <SoundWrapper>
                   <button
@@ -506,12 +506,14 @@ const SnakeGame = () => {
 
         <div className="flex flex-col h-full">
           <div className="mb-auto text-primary-7 rounded-lg">
-            <p className="text-base">{"// use keyboard"}</p>
-            <p className="mb-2 text-base">{"// arrows or WASD"}</p>
+            <p className="text-base">{`// use keyboard`}</p>
+            <p className="mb-2 text-base">{`// arrows or WASD`}</p>
             <div className="flex flex-col items-center pt-2 gap-2">
               <div className="flex justify-center">
                 <button
-                  className={`px-5 py-2 rounded-lg border border-primary-3 transition-all duration-200 flex items-center justify-center ${state.activeKeys.up ? "bg-green-500" : ""}`}
+                  className={`px-5 py-2 rounded-lg border border-primary-3 transition-all duration-200 flex items-center justify-center ${
+                    state.activeKeys.up ? "bg-green-500" : ""
+                  }`}
                   aria-label="Move up"
                   disabled
                 >
@@ -522,7 +524,9 @@ const SnakeGame = () => {
                 {["left", "down", "right"].map((dir) => (
                   <button
                     key={dir}
-                    className={`px-5 py-2 rounded-lg border border-primary-3 transition-all duration-200 flex items-center justify-center ${state.activeKeys[dir] ? "bg-green-500" : ""}`}
+                    className={`px-5 py-2 rounded-lg border border-primary-3 transition-all duration-200 flex items-center justify-center ${
+                      state.activeKeys[dir] ? "bg-green-500" : ""
+                    }`}
                     aria-label={`Move ${dir}`}
                     disabled
                   >
@@ -531,16 +535,20 @@ const SnakeGame = () => {
                 ))}
               </div>
             </div>
-            <p className="mt-6 text-base">{"// food left"}</p>
+            <p className="mt-6 text-base">{`// food left`}</p>
             <div className="grid grid-cols-5 gap-2 mt-2">
-              {Array.from({ length: 10 }).map((_, index) => (
+              {Array.from({ length: 10 }, (_, foodIndex) => (
                 <div
-                  key={index}
-                  className={`w-6 h-6 bg-green-400 rounded-full transition-all duration-200 ${index < 10 - state.foodCount ? "opacity-100" : "opacity-50"}`}
+                  key={`food-${foodIndex}`}
+                  className={`w-6 h-6 bg-green-400 rounded-full transition-all duration-200 ${
+                    foodIndex < 10 - state.foodCount
+                      ? "opacity-100"
+                      : "opacity-50"
+                  }`}
                   style={{
-                    transform: `scale(${getFoodScale(index)})`,
+                    transform: `scale(${getFoodScale(foodIndex)})`,
                     boxShadow:
-                      index < 10 - state.foodCount
+                      foodIndex < 10 - state.foodCount
                         ? "0 0 8px rgba(46, 204, 113, 0.8)"
                         : "none",
                   }}

@@ -9,16 +9,14 @@ const ProjectCard = ({
   image,
   url,
 }) => {
-  const handleLinkClick = () => {
-    if (url) {
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
+  const openProject = () => {
+    if (url) window.open(url, "_blank", "noopener noreferrer");
   };
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      handleLinkClick();
+      openProject();
     }
   };
 
@@ -27,13 +25,12 @@ const ProjectCard = ({
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex pb-3">
-        <p className="pr-2 text-primary-5">{title}</p>
-        {description && (
-          <p className="text-primary-2">{/* // {description} */}</p>
-        )}
-      </div>
+    <article className="flex flex-col">
+      <header className="flex pb-3">
+        <h3 className="pr-2 text-primary-5">{title}</h3>
+        {description && <p className="text-primary-2"></p>}
+      </header>
+
       <div className="border shadow-sm border-primary-3 rounded-xl shadow-black">
         <img
           className="h-auto rounded-t-xl"
@@ -42,17 +39,19 @@ const ProjectCard = ({
           loading="lazy"
           onError={handleImageError}
         />
+
         <div className="bg-[#011221] px-8 py-4 rounded-b-xl">
           {longDescription && (
             <p className="pb-5 tracking-widest text-primary-2">
               {longDescription}
             </p>
           )}
+
           <SoundWrapper>
             <button
               type="button"
-              className="px-3 py-2 text-sm rounded-lg text-primary-7 bg-[#1C2B3A] inline-block hover:bg-[#263b52] transition-colors"
-              onClick={handleLinkClick}
+              className="px-3 py-2 text-sm rounded-lg text-primary-7 bg-[#1C2B3A] inline-block hover:bg-[#263b52] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={openProject}
               onKeyDown={handleKeyDown}
               disabled={!url}
               aria-label={`View ${title} project`}
@@ -62,7 +61,7 @@ const ProjectCard = ({
           </SoundWrapper>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

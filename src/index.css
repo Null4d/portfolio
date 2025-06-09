@@ -12,6 +12,10 @@
   --primary-7: #f8fafc;
 }
 
+body {
+  background-color: var(--primary-1);
+}
+
 @font-face {
   font-family: "Kode Mono";
   src:
