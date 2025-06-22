@@ -48,9 +48,13 @@ ErrorBoundary.propTypes = {
 };
 
 function App() {
+  const basename = window.location.hostname.includes("github.io")
+    ? "/portfolio"
+    : "";
+
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <MainLayout>
           <Suspense fallback={<LoadingSpinner />}>
             <Routes>

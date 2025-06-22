@@ -67,7 +67,7 @@ const Footer = () => {
         }
       });
     },
-    [calculateMagnification, hoveredItem]
+    [calculateMagnification, hoveredItem],
   );
 
   const handleEnd = useCallback(() => {
@@ -154,7 +154,9 @@ const Footer = () => {
                         transform: "scale(var(--dock-scale, 1))",
                         marginInline: "calc(var(--dock-margin, 0px) + 6px)",
                       }}
-                      onMouseEnter={() => !isMobile && setHoveredItem(item.name)}
+                      onMouseEnter={() =>
+                        !isMobile && setHoveredItem(item.name)
+                      }
                       onMouseLeave={() => !isMobile && setHoveredItem(null)}
                     >
                       <div className={`${iconClasses} ${bgClass}`} />
