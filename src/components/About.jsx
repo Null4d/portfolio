@@ -1,5 +1,6 @@
 import React from "react";
 import CodeSnippet from "./CodeSnippet";
+import GitHubContributions from "./GitHubContributions";
 import { aboutData } from "../data/index";
 import { SoundWrapper } from "../audio/AudioEngine";
 
@@ -83,6 +84,8 @@ const About = () => {
             <p>About Me</p>
             <div>{renderDescription()}</div>
             <p>{`*/`}</p>
+
+            <GitHubContributions />
           </div>
         </div>
       </main>

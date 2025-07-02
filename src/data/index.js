@@ -35,15 +35,14 @@ export const aboutData = {
     age: 15,
     location: "Georgia",
     title: "Frontend Developer",
-    description: `Hello! My name is Batu, and I am a passionate Frontend developer. I am 15 years old and currently living in Georgia. My journey into programming started at an early age, driven by my curiosity about how technology works. Over time, I honed my skills in coding, web development, and frontend development, exploring various programming languages and frameworks.
+    description: `Hello! I'm Batu, a 15-year-old passionate Frontend Developer currently living in Georgia. My journey into programming started early, fueled by curiosity about how websites and technology work. Over time, I’ve gained experience with HTML, CSS, JavaScript, and modern frameworks, and I enjoy building responsive, user-friendly interfaces.
 
-In addition to coding, I have a deep love for anime. I enjoy watching a wide range of anime series, from action-packed shonen to thought-provoking psychological thrillers. This passion led me to anime editing, where I create AMVs (Anime Music Videos) to bring my favorite scenes to life in new and creative ways.
+Outside of coding, I'm a huge anime fan. I enjoy watching various genres—from action-packed shonen to psychological thrillers. This passion led me to AMV (Anime Music Video) editing, where I express my creativity by syncing anime clips with music and effects.
 
-When I'm not coding or editing, I spend my time playing video games, experimenting with game development, and exploring new tech trends. I enjoy problem-solving, building projects, and continuously learning to improve my craft.
+In my free time, I love gaming, exploring game development, and keeping up with new tech trends. I enjoy solving problems, building fun projects, and learning something new every day.
 
-My goal is to become a highly skilled Frontend developer, contribute to innovative projects, and one day make a significant impact in the tech industry. If you share similar interests or want to collaborate, feel free to connect!`,
+My goal is to become a skilled Frontend Developer, contribute to exciting projects, and make an impact in the tech industry. If you’re into tech, anime, or creative projects, I’d love to connect!`,
   },
-
   certificates: [
     {
       name: "CodeCademy",
@@ -139,3 +138,78 @@ export const socialLinksData = [
     iconClass: "icon-mail",
   },
 ];
+
+export const githubData = {
+  username: "Null4d",
+  currentYear: new Date().getFullYear(),
+  startYear: 2020,
+  contributionColors: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+  dayLabels: ["", "Mon", "", "Wed", "", "Fri", ""],
+  monthLabels: [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ],
+  dayLabelsShort: ["Mon", "Wed", "Fri"],
+  loadingText: "Loading GitHub contributions...",
+  errorTitle: "GitHub Contributions",
+  errorMessage: "Unable to load contribution data for {year}.",
+  contributionsText: "{count} contributions in {year}",
+  reposText: "All repos",
+  legendLabels: {
+    less: "Less",
+    more: "More",
+  },
+  tooltipText: {
+    singular: "contribution",
+    plural: "contributions",
+    on: "on",
+  },
+  apiErrors: {
+    noUserData: "No user data",
+  },
+  svgConfig: {
+    cellSize: 11,
+    cellGap: 3,
+    topPadding: 25,
+    dayLabelOffset: 20,
+    borderRadius: 2,
+    monthLabelSize: 10,
+    dayLabelSize: 9,
+    labelColor: "#7d8590",
+    hoverStroke: "#ffffff",
+  },
+  contributionLevels: [
+    { min: 0, max: 0, level: 0 },
+    { min: 1, max: 3, level: 1 },
+    { min: 4, max: 6, level: 2 },
+    { min: 7, max: 9, level: 3 },
+    { min: 10, max: Infinity, level: 4 },
+  ],
+  graphqlQuery: `
+    query($username: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $username) {
+        contributionsCollection(from: $from, to: $to) {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                contributionCount
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+};

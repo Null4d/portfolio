@@ -104,14 +104,14 @@ const Footer = () => {
     : {};
 
   return (
-    <footer className="relative bg-primary-1">
-      <div className="flex items-center justify-center h-16 pl-5 border md:pl-5 border-primary-3">
-        <div className="fixed flex items-center justify-center z-3">
+    <footer className="relative bg-primary-1 flex-shrink-0">
+      <div className="flex items-center justify-center h-16 pl-5 border md:pl-5 border-primary-3 relative">
+        <div className="flex items-center justify-center relative z-10">
           <div className="flex w-full h-full backdrop-blur-sm absolute rounded-[15px]" />
 
           <nav
             ref={dockRef}
-            className="relative z-1 h-12 flex justify-center items-center transition-all duration-300 border border-primary-3 shadow-[0px_5px_25px_rgba(0,0,0,1)] rounded-[15px] touch-none select-none"
+            className="relative z-20 h-12 flex justify-center items-center transition-all duration-300 border border-primary-3 shadow-[0px_5px_25px_rgba(0,0,0,1)] rounded-[15px] touch-none select-none"
             {...mouseHandlers}
             {...touchHandlers}
             aria-label="Social links"
@@ -131,7 +131,7 @@ const Footer = () => {
                 <div key={item.name} className="relative">
                   {isHovered && (
                     <div
-                      className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-10 backdrop-blur-[2px] lg:backdrop-blur-none"
+                      className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none z-30 backdrop-blur-[2px] lg:backdrop-blur-none"
                       style={{ top: DOCK_CONFIG.TOOLTIP_OFFSET }}
                       role="tooltip"
                     >
